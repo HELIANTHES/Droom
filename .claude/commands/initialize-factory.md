@@ -315,3 +315,6 @@ See /marketing-factory/README.md for detailed setup instructions.
 
 
 also you do not have to follow the specs EXACTLY as they are. the purpose of the spec docs is that much of the arhcitecture is already thought out for you. But you're more than welcome to make adjustments as you are building if you think things can be improved/streamlined.
+
+
+let me know any environment variables you need me to populate, where to place them, what to name them, etc.
