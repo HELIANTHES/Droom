@@ -312,3 +312,6 @@ See /marketing-factory/README.md for detailed setup instructions.
 - All agent.md files should be concise and delegate details to system-specs/
 - Templates and schemas are intentionally NOT created here - Layer 1 handles on first spawn
 - Agents reference system-specs/ in /droom/ for implementation guidance
+
+
+also you do not have to follow the specs EXACTLY as they are. the purpose of the spec docs is that much of the arhcitecture is already thought out for you. But you're more than welcome to make adjustments as you are building if you think things can be improved/streamlined.
