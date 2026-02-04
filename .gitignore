@@ -1,3 +1,6 @@
 system-knowledge/*
 versions/*
 clients/*
+
+marketing-factory/.env
+*/**/.env

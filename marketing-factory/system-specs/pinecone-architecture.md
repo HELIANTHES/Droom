@@ -8,6 +8,12 @@ Clients are isolated via namespaces with the pattern: `{namespace-type}-{brand-i
 
 **Purpose:** Semantic memory for intelligent content matching, scenario retrieval, and cross-campaign learning.
 
+for connection, use the available environment variables:
+PINECONE_API_KEY
+PINECONE_INDEX_NAME
+
+also keep in mind that the pinecone db corresponding to the above env vars already exists and is in use for other projects so you will need to make sure the entities and relationships and namespaces you create do not conflict with existing ones so you may need to review the existing schema
+
 ## Why Pinecone?
 
 - **Semantic search:** Find similar content, scenarios, audiences by meaning, not exact match

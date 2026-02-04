@@ -4,7 +4,14 @@
 
 All clients share a single Neo4j database instance with data isolated by `brand_id` property on all nodes.
 
-**Database Name:** `marketing-automation`
+for connection, use the available environment variables:
+NEO4J_URI
+NEO4J_USER
+NEO4J_PASSWORD
+
+also keep in mind that the neo4j db corresponding to the above env vars already exists and is in use for other projects so you will need to make sure the entities and relationships you create do not conflict with existing ones so you may need to review the existing schema
+
+
 
 **Purpose:** Structured storage of entities, relationships, and performance data. Enables fast graph traversals, relationship queries, and complex pattern matching.
 
