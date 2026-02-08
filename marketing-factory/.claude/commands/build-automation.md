@@ -45,7 +45,7 @@ Read brand-config.json. Extract: brand_id, brand_name, business_model, platforms
 Generate complete, valid n8n workflow JSON files in `clients/{name}/automation/`:
 
 **Core workflows (always built):**
-1. `content-ingestion.json` — Google Drive trigger → Claude Vision analysis → embedding → dual storage → dashboard notification
+1. `content-ingestion.json` — S3 event trigger → Claude Vision analysis → embedding → dual storage → dashboard notification
 2. `daily-performance.json` — Cron 2AM → fetch platform data → CSO Agent analysis → tactical decisions → dashboard update
 3. `weekly-strategy.json` — Cron Monday 3AM → multi-agent analysis (CSO → Creative Intelligence → Cultural Anthropologist → Data Scientist) → Client Translator report → email + dashboard
 4. `creative-rotation.json` — Cron 1AM → detect fatigue → find replacements → gradual rotation

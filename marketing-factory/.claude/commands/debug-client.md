@@ -52,7 +52,7 @@ Read the problem description and categorize it:
 ### Step 2: Trace the Data Flow
 Based on the problem category, trace the relevant data flow path:
 
-- **Content not appearing:** Google Drive → n8n content-ingestion → Claude Vision → embedding → Pinecone + Neo4j → dashboard API → frontend
+- **Content not appearing:** AWS S3 → n8n content-ingestion → Claude Vision → embedding → Pinecone + Neo4j → dashboard API → frontend
 - **Forms not processing:** Website form → API route → n8n webhook → Neo4j lead → scoring → notification
 - **Performance data missing:** Cron trigger → platform API → Neo4j storage → dashboard API → frontend
 - **Reports not sending:** Cron trigger → Neo4j queries → agent analysis → email send

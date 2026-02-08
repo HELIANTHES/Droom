@@ -25,8 +25,8 @@ This spec consolidates all setup, configuration, deployment, and monitoring guid
 - **Claude API** — Anthropic API key for runtime agent invocations in n8n workflows
 - **OpenAI API** — API key for text-embedding-3-small embedding generation
 - **Neo4j** — URI, username, password (AuraDB or self-hosted)
-- **Pinecone** — API key, environment, index name (`marketing-automation`)
-- **Google Drive** — OAuth2 service account with editor access to client's content folders
+- **Pinecone** — API key, environment, index name (`graphelion-deux`)
+- **AWS S3** — AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY with read/write access to the `droom` bucket
 - **Google Ads** — OAuth2 with campaign management scope, customer ID
 - **Meta Marketing API** — Access token with ads_management permission, ad account ID
 - **SendGrid/Resend** — API key for transactional email (lead notifications, weekly reports)
@@ -42,14 +42,16 @@ This spec consolidates all setup, configuration, deployment, and monitoring guid
 - Document where to obtain each credential (links to platform developer consoles)
 - Store credentials in n8n credential manager for workflows, platform secrets for dashboard/website backends
 
-## Google Drive Setup
+## AWS S3 Storage Setup
 
-**Folder structure per client:**
-- `/clients/{brand_id}/content/` — n8n watches this folder for new uploads (content ingestion trigger)
-- `/clients/{brand_id}/archive/` — Retired/replaced content
-- `/clients/{brand_id}/drafts/` — Work in progress, not monitored by n8n
+**Bucket:** `droom` (region: us-east-1)
 
-**Access model:** Client owns the folders. Service account gets editor access. n8n uses service account credentials to watch and download from `/content/`.
+**Key structure per client:**
+- `s3://droom/clients/{brand_id}/content/` — n8n watches this prefix for new uploads (content ingestion trigger via S3 event notifications)
+- `s3://droom/clients/{brand_id}/archive/` — Retired/replaced content
+- `s3://droom/clients/{brand_id}/drafts/` — Work in progress, not monitored by n8n
+
+**Access model:** AWS credentials in .env have read/write access to the `droom` bucket. n8n uses these credentials to monitor and download from `/content/` prefix. Client uploads via pre-signed URLs or direct S3 access.
 
 ## Analytics & Tracking Setup
 

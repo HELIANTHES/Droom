@@ -1,7 +1,7 @@
 # n8n Workflow System
 
 <purpose>
-n8n is the autonomous runtime engine. After initial build, it runs the client's marketing system without human intervention — analyzing performance, optimizing budgets, rotating creative, scoring leads, and learning from outcomes. It connects Claude API (intelligence), Neo4j + Pinecone (memory), ad platforms (execution), Google Drive (content intake), and the dashboard (visualization).
+n8n is the autonomous runtime engine. After initial build, it runs the client's marketing system without human intervention — analyzing performance, optimizing budgets, rotating creative, scoring leads, and learning from outcomes. It connects Claude API (intelligence), Neo4j + Pinecone (memory), ad platforms (execution), AWS S3 (content intake), and the dashboard (visualization).
 
 The n8n-architect agent builds 7-9 workflow JSON files per client. The marketing-agent-prompt-engineer creates 6 runtime agent prompts that these workflows invoke via Claude API.
 </purpose>
@@ -28,8 +28,8 @@ The n8n-architect agent builds 7-9 workflow JSON files per client. The marketing
 ### Core Workflows (Always Built)
 
 **1. Content Ingestion** — `content-ingestion.json`
-- Trigger: Google Drive file added to `/clients/{brand_id}/content/`
-- Flow: Download file → Claude Vision analysis (emotional tones, visual aesthetics, color palette, composition, narrative elements, semantic description) → Generate content ID → Create embedding from semantic description → Store vector in Pinecone `content-essence-{brand_id}` namespace → Create Content node + attribute relationships in Neo4j → Notify dashboard
+- Trigger: S3 event notification — file added to `s3://droom/clients/{brand_id}/content/`
+- Flow: Download file from S3 → Claude Vision analysis (emotional tones, visual aesthetics, color palette, composition, narrative elements, semantic description) → Generate content ID → Create embedding from semantic description → Store vector in Pinecone `droom-content-essence-{brand_id}` namespace → Create `:Droom:Content` node + attribute relationships in Neo4j → Notify dashboard
 - Cost: ~$0.03/file (Claude Vision + embedding)
 - Duration: 2-3 minutes per file
 
@@ -81,7 +81,7 @@ The n8n-architect agent builds 7-9 workflow JSON files per client. The marketing
 ## Integration Points
 
 **Inputs consumed by workflows:**
-- Google Drive: content files (video/image uploads)
+- AWS S3: content files (video/image uploads from `s3://droom/clients/{brand_id}/content/`)
 - Google Ads API: campaign performance data (impressions, clicks, conversions, spend, revenue)
 - Meta Marketing API: campaign performance data (same metrics)
 - Shopify Webhooks: order data (e-commerce only)
@@ -152,5 +152,5 @@ The n8n-architect agent builds 7-9 workflow JSON files per client. The marketing
 
 **n8n hosting:** Self-hosted ($0 beyond VPS) or n8n Cloud (~$20/month for all clients)
 
-**Credentials required:** Google Ads API, Meta Marketing API, Claude API, OpenAI API, Pinecone API, Neo4j credentials, Google Drive OAuth2, SendGrid/Mailgun, Shopify API (if e-commerce)
+**Credentials required:** Google Ads API, Meta Marketing API, Claude API, OpenAI API, Pinecone API, Neo4j credentials, AWS S3 credentials, SendGrid/Mailgun, Shopify API (if e-commerce)
 </reference_examples>

@@ -1,0 +1,278 @@
+{
+  "meta": {
+    "brand_id": "eastern-healing-traditions",
+    "brand_name": "Eastern Healing Traditions",
+    "business_model": "brick-and-mortar-primary",
+    "generated": "2026-02-08",
+    "version": "1.0.0",
+    "notes": "All credential values are referenced via environment variables. No secrets stored in this file."
+  },
+
+  "services": {
+    "neo4j": {
+      "description": "Graph database — structured facts, relationships, campaign data, lead tracking",
+      "uri": { "env": "NEO4J_URI" },
+      "username": { "env": "NEO4J_USERNAME" },
+      "password": { "env": "NEO4J_PASSWORD" },
+      "database": { "env": "NEO4J_DATABASE", "default": "neo4j" },
+      "isolation": {
+        "label": "Droom",
+        "brand_id_property": "brand_id",
+        "brand_id_value": "eastern-healing-traditions",
+        "notes": "Shared database with non-Droom data. ALL queries must filter by :Droom label AND brand_id."
+      },
+      "constraints": [
+        "droom_content_id_unique",
+        "droom_campaign_id_unique",
+        "droom_lead_id_unique",
+        "droom_performance_id_unique",
+        "droom_websiteform_id_unique",
+        "droom_demographic_id_unique",
+        "droom_geographic_id_unique"
+      ],
+      "health_check_query": "RETURN 1 AS ok",
+      "isolation_check_query": "SHOW CONSTRAINTS YIELD name WHERE name STARTS WITH 'droom_' RETURN count(*) AS constraint_count"
+    },
+
+    "pinecone": {
+      "description": "Vector database — semantic memory, similarity search, content embeddings",
+      "api_key": { "env": "PINECONE_API_KEY" },
+      "index": "graphelion-deux",
+      "dimensions": 1536,
+      "metric": "cosine",
+      "embedding_model": "text-embedding-3-small",
+      "namespaces": {
+        "content_essence": "droom-content-essence-eastern-healing-traditions",
+        "scenario_outcomes": "droom-scenario-outcomes-eastern-healing-traditions",
+        "audience_psychographics": "droom-audience-psychographics-eastern-healing-traditions",
+        "narrative_patterns": "droom-narrative-patterns-eastern-healing-traditions",
+        "cross_campaign_learnings": "droom-cross-campaign-learnings"
+      },
+      "isolation": {
+        "namespace_prefix": "droom-",
+        "notes": "Index graphelion-deux is shared with non-Droom data. All Droom operations use droom- prefixed namespaces."
+      }
+    },
+
+    "aws_s3": {
+      "description": "Object storage — creative assets (video, images), generated reports",
+      "region": "us-east-1",
+      "access_key_id": { "env": "AWS_ACCESS_KEY_ID" },
+      "secret_access_key": { "env": "AWS_SECRET_ACCESS_KEY" },
+      "bucket": "droom",
+      "key_prefix": "clients/eastern-healing-traditions/",
+      "paths": {
+        "raw_uploads": "clients/eastern-healing-traditions/uploads/",
+        "processed_assets": "clients/eastern-healing-traditions/assets/",
+        "reports": "clients/eastern-healing-traditions/reports/",
+        "backups": "clients/eastern-healing-traditions/backups/"
+      },
+      "isolation": {
+        "notes": "Shared bucket 'droom'. All keys for this client are prefixed with clients/eastern-healing-traditions/."
+      }
+    },
+
+    "claude_api": {
+      "description": "Anthropic Claude — runtime agent reasoning, content analysis via Claude Vision",
+      "api_key": { "env": "ANTHROPIC_API_KEY" },
+      "base_url": "https://api.anthropic.com",
+      "default_model": "claude-sonnet-4-20250514",
+      "vision_model": "claude-sonnet-4-20250514",
+      "max_tokens_default": 4096,
+      "endpoints": {
+        "messages": "/v1/messages"
+      },
+      "usage": [
+        "Content Ingestion — Claude Vision analyzes uploaded creative assets",
+        "Daily Performance Analysis — CSO agent evaluates metrics and makes decisions",
+        "Weekly Strategy Review — all 6 runtime agents analyze the week",
+        "Creative Rotation — Creative Intelligence agent selects replacement content",
+        "Lead Scoring — evaluates lead quality from form submissions"
+      ]
+    },
+
+    "openai_api": {
+      "description": "OpenAI — text embeddings for Pinecone vector storage",
+      "api_key": { "env": "OPENAI_API_KEY" },
+      "base_url": "https://api.openai.com/v1",
+      "embedding_model": "text-embedding-3-small",
+      "embedding_dimensions": 1536,
+      "endpoints": {
+        "embeddings": "/embeddings"
+      },
+      "usage": [
+        "Embedding generation for Pinecone content-essence namespace",
+        "Embedding generation for scenario-outcomes namespace",
+        "Embedding generation for audience-psychographics namespace",
+        "Embedding generation for narrative-patterns namespace",
+        "Query embedding for similarity searches"
+      ]
+    },
+
+    "google_ads": {
+      "description": "Google Ads API — search ads, local service ads, performance data",
+      "client_id": { "env": "GOOGLE_ADS_CLIENT_ID" },
+      "client_secret": { "env": "GOOGLE_ADS_CLIENT_SECRET" },
+      "developer_token": { "env": "GOOGLE_ADS_DEVELOPER_TOKEN" },
+      "refresh_token": { "env": "GOOGLE_ADS_REFRESH_TOKEN" },
+      "login_customer_id": { "env": "GOOGLE_ADS_LOGIN_CUSTOMER_ID" },
+      "customer_id": { "env": "GOOGLE_ADS_CUSTOMER_ID" },
+      "api_version": "v17",
+      "base_url": "https://googleads.googleapis.com",
+      "platforms_served": ["google-search"],
+      "formats": ["search-ads", "local-service-ads"],
+      "budget_allocation": {
+        "monthly": 1200,
+        "percentage": 40
+      }
+    },
+
+    "meta_marketing": {
+      "description": "Meta Marketing API — Facebook and Instagram ads, performance data",
+      "access_token": { "env": "META_ACCESS_TOKEN" },
+      "app_id": { "env": "META_APP_ID" },
+      "app_secret": { "env": "META_APP_SECRET" },
+      "ad_account_id": { "env": "META_AD_ACCOUNT_ID" },
+      "pixel_id": { "env": "META_PIXEL_ID" },
+      "api_version": "v21.0",
+      "base_url": "https://graph.facebook.com",
+      "platforms_served": ["facebook", "instagram"],
+      "formats": {
+        "facebook": ["single-image", "carousel", "video", "lead-forms"],
+        "instagram": ["reels", "stories", "carousel", "single-image"]
+      },
+      "budget_allocation": {
+        "facebook_monthly": 900,
+        "instagram_monthly": 450,
+        "combined_percentage": 45
+      }
+    },
+
+    "youtube_ads": {
+      "description": "YouTube Ads — managed through Google Ads API",
+      "notes": "YouTube campaigns are managed via the Google Ads API connection above.",
+      "platforms_served": ["youtube"],
+      "formats": ["in-stream-skippable", "discovery-ads"],
+      "budget_allocation": {
+        "monthly": 450,
+        "percentage": 15
+      }
+    },
+
+    "sendgrid": {
+      "description": "SendGrid — transactional and marketing email (weekly reports, lead notifications, retention)",
+      "api_key": { "env": "SENDGRID_API_KEY" },
+      "base_url": "https://api.sendgrid.com/v3",
+      "from_email": { "env": "SENDGRID_FROM_EMAIL", "default": "reports@droom.ai" },
+      "from_name": "Droom Marketing Factory",
+      "endpoints": {
+        "send": "/mail/send",
+        "templates": "/templates",
+        "contacts": "/marketing/contacts"
+      },
+      "usage": [
+        "Weekly strategy review reports emailed to client",
+        "Lead notification emails to practitioner",
+        "Alert emails for budget anomalies or performance drops"
+      ]
+    },
+
+    "twilio": {
+      "description": "Twilio — SMS notifications for high-priority leads and urgent alerts",
+      "account_sid": { "env": "TWILIO_ACCOUNT_SID" },
+      "auth_token": { "env": "TWILIO_AUTH_TOKEN" },
+      "phone_number": { "env": "TWILIO_PHONE" },
+      "recipient_phone": { "env": "TWILIO_RECIPIENT_PHONE", "default": "+12245410022" },
+      "base_url": "https://api.twilio.com/2010-04-01",
+      "endpoints": {
+        "messages": "/Accounts/{account_sid}/Messages.json"
+      },
+      "usage": [
+        "SMS alert when a hot-tier lead submits a form",
+        "SMS alert for critical performance anomalies",
+        "SMS notification for weekly report summary"
+      ]
+    },
+
+    "n8n": {
+      "description": "n8n workflow automation — orchestrates all runtime operations",
+      "base_url": { "env": "N8N_BASE_URL", "default": "http://localhost:5678" },
+      "api_key": { "env": "N8N_API_KEY" },
+      "webhooks": {
+        "content_ingestion": {
+          "path": "/webhook/droom/eastern-healing-traditions/content-ingestion",
+          "method": "POST",
+          "trigger": "S3 upload event",
+          "description": "Receives S3 event notification when new creative asset is uploaded"
+        },
+        "form_ingestion": {
+          "path": "/webhook/droom/eastern-healing-traditions/form-ingestion",
+          "method": "POST",
+          "trigger": "Website form submission",
+          "description": "Receives form submission data from website for lead scoring and routing"
+        },
+        "manual_trigger": {
+          "path": "/webhook/droom/eastern-healing-traditions/manual-trigger",
+          "method": "POST",
+          "trigger": "Manual / dashboard button",
+          "description": "Allows manual triggering of specific workflows from the dashboard"
+        },
+        "health_ping": {
+          "path": "/webhook/droom/eastern-healing-traditions/health",
+          "method": "GET",
+          "trigger": "Health check",
+          "description": "Returns n8n status and active workflow count"
+        }
+      },
+      "scheduled_workflows": {
+        "daily_performance_analysis": { "cron": "0 2 * * *", "description": "2 AM daily — CSO agent reviews performance" },
+        "creative_rotation": { "cron": "0 1 * * *", "description": "1 AM daily — detect fatigued content, deploy replacements" },
+        "budget_optimization": { "cron": "0 3 * * *", "description": "3 AM daily — optimize budget across platforms/demographics/geo" },
+        "learn_and_remember": { "cron": "0 4 * * *", "description": "4 AM daily — store patterns, update relationship weights" },
+        "weekly_strategy_review": { "cron": "0 3 * * 1", "description": "Monday 3 AM — all 6 agents analyze, generate client report" }
+      }
+    },
+
+    "dashboard_api": {
+      "description": "Droom Analytics Dashboard — FastAPI backend serving the Next.js frontend",
+      "base_url": { "env": "DASHBOARD_API_URL", "default": "http://localhost:8000" },
+      "api_key": { "env": "DASHBOARD_API_KEY" },
+      "endpoints": {
+        "health": "/api/health",
+        "performance_summary": "/api/v1/brands/eastern-healing-traditions/performance/summary",
+        "campaign_list": "/api/v1/brands/eastern-healing-traditions/campaigns",
+        "campaign_detail": "/api/v1/brands/eastern-healing-traditions/campaigns/{campaign_id}",
+        "leads": "/api/v1/brands/eastern-healing-traditions/leads",
+        "content_library": "/api/v1/brands/eastern-healing-traditions/content",
+        "demographics": "/api/v1/brands/eastern-healing-traditions/demographics",
+        "geographic": "/api/v1/brands/eastern-healing-traditions/geographic",
+        "agent_decisions": "/api/v1/brands/eastern-healing-traditions/agent-log",
+        "budget_status": "/api/v1/brands/eastern-healing-traditions/budget"
+      }
+    },
+
+    "website_api": {
+      "description": "Eastern Healing Traditions website — Next.js with booking forms and contact forms",
+      "base_url": { "env": "WEBSITE_URL", "default": "https://easternhealingtraditions.com" },
+      "endpoints": {
+        "booking_form": "/api/forms/booking",
+        "contact_form": "/api/forms/contact",
+        "consultation_request": "/api/forms/consultation",
+        "sitemap": "/sitemap.xml",
+        "health": "/api/health"
+      },
+      "tracking": {
+        "google_analytics_id": { "env": "GA_MEASUREMENT_ID" },
+        "google_ads_conversion_id": { "env": "GOOGLE_ADS_CONVERSION_ID" },
+        "google_ads_conversion_label": { "env": "GOOGLE_ADS_CONVERSION_LABEL" },
+        "meta_pixel_id": { "env": "META_PIXEL_ID" }
+      }
+    }
+  },
+
+  "environment_files": {
+    "primary": "../../.env",
+    "template": "credentials/.env.template",
+    "notes": "The .env file lives at the client root (clients/eastern-healing-traditions/.env). The template in credentials/ documents all required and optional variables."
+  }
+}

@@ -61,13 +61,13 @@ A 150-200 word rich narrative description capturing the essence of the content: 
 
 ## Storage Split
 
-**Pinecone** (content-essence-{brand_id} namespace):
+**Pinecone** (droom-content-essence-{brand_id} namespace):
 - Vector: embedding of semantic description (text-embedding-3-small, 1536 dimensions)
 - Metadata: all profile attributes (flattened), plus performance metrics that accumulate over time (total_impressions, total_spend, avg_roas, creative_fatigue_score, status)
 
 **Neo4j:**
-- Content node (Video or Image label): id, brand_id, drive_id, filename, upload/profile dates, status, aggregate performance metrics
-- Relationships to shared attribute nodes: `(Content)-[:HAS_TONE {confidence}]->(Tone)`, `(Content)-[:HAS_AESTHETIC {confidence}]->(Aesthetic)`, etc.
+- Content node (`:Droom:Content:Video` or `:Droom:Content:Image`): id, brand_id, s3_key, s3_url, filename, upload/profile dates, status, aggregate performance metrics
+- Relationships to shared attribute nodes: `(:Droom:Content)-[:HAS_TONE {confidence}]->(:Droom:Tone)`, `(:Droom:Content)-[:HAS_AESTHETIC {confidence}]->(:Droom:Aesthetic)`, etc.
 
 ## How Profiles Drive Decisions
 

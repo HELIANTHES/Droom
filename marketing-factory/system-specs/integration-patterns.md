@@ -1,7 +1,7 @@
 # Integration Patterns
 
 <purpose>
-This spec describes how data flows between all system components and the patterns that govern their communication. The system has four layers: external services (Google Ads, Meta, Claude API, Google Drive, Shopify), n8n workflows (orchestration engine), data layer (Neo4j + Pinecone), and presentation layer (dashboard + website, each with FastAPI backend + Next.js frontend).
+This spec describes how data flows between all system components and the patterns that govern their communication. The system has four layers: external services (Google Ads, Meta, Claude API, AWS S3, Shopify), n8n workflows (orchestration engine), data layer (Neo4j + Pinecone), and presentation layer (dashboard + website, each with FastAPI backend + Next.js frontend).
 
 Data flows in clear, unidirectional patterns with well-defined handoff points. Each component has a specific responsibility and communicates via HTTP APIs or webhooks.
 </purpose>
@@ -25,7 +25,7 @@ Data flows in clear, unidirectional patterns with well-defined handoff points. E
 
 ### Flow 1: Content Upload → Analysis → Storage
 ```
-Google Drive (file uploaded) → n8n Content Ingestion workflow → Claude Vision API (analysis) → OpenAI (embedding) → Pinecone (vector) + Neo4j (node + relationships) → Dashboard API webhook (content-uploaded notification)
+AWS S3 (file uploaded to s3://droom/clients/{brand_id}/content/) → n8n Content Ingestion workflow → Claude Vision API (analysis) → OpenAI (embedding) → Pinecone (vector) + Neo4j (node + relationships) → Dashboard API webhook (content-uploaded notification)
 ```
 **Result:** Content profiled and ready for campaign use. Dashboard shows new content in library.
 
@@ -88,7 +88,7 @@ Dashboard frontend (user request) → Dashboard FastAPI backend → Neo4j (struc
 - Meta Marketing API — Campaign performance data, ad management
 - Claude API (Anthropic) — Runtime agent invocations
 - OpenAI API — Embedding generation
-- Google Drive API — File monitoring and downloads
+- AWS S3 API — File monitoring (S3 event notifications) and downloads
 - SendGrid/Mailgun — Email delivery
 - Twilio — SMS notifications (hot leads)
 </interfaces>

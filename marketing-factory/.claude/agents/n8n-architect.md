@@ -28,8 +28,8 @@ Read `.build-context.md` for upstream decisions, especially database schema deta
 ## What You Build
 
 **Core workflows (always built):**
-1. `content-ingestion.json` — Google Drive trigger → Claude Vision analysis → embedding → Pinecone + Neo4j storage → dashboard notification
-2. `daily-performance.json` — Cron 2AM → fetch Google Ads + Meta data → merge metrics → store in Neo4j → query Pinecone scenarios → CSO Agent analysis → execute tactical decisions → dashboard update
+1. `content-ingestion.json` — S3 event trigger → Claude Vision analysis → embedding → Pinecone + Neo4j storage → dashboard notification
+2. `daily-performance.json` — Cron 2AM → fetch Google Ads + Meta data → merge metrics → store in Neo4j → query Pinecone scenarios → CSO Agent analysis → execute tactical decisions
 3. `weekly-strategy.json` — Cron Monday 3AM → compile weekly data → invoke 4 agents sequentially (CSO → Creative Intelligence → Cultural Anthropologist → Data Scientist) → Client Translator report → email + dashboard
 4. `creative-rotation.json` — Cron 1AM → detect content fatigue (CTR decline >30% over 7-14 days) → find similar fresh content → Media Buyer executes gradual rotation
 5. `budget-optimization.json` — Cron 3AM → calculate ROAS by dimension → Data Scientist optimization → CSO decision → Media Buyer execution

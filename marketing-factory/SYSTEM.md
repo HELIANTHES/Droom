@@ -60,7 +60,7 @@ Brand Research → Competitive Intelligence → Strategist → Creative Director
 
 **During Runtime (Layer 2, autonomous):**
 ```
-Content Upload → Google Drive → n8n Content Ingestion → Claude Vision → Neo4j + Pinecone
+Content Upload → AWS S3 → n8n Content Ingestion → Claude Vision → Neo4j + Pinecone
                                                                               ↓
 Daily (2 AM) → n8n Performance Analysis → CSO Agent → Budget/Creative Decisions
                                                               ↓
@@ -83,7 +83,7 @@ User Request → Orchestrator → reads .manifest.md → determines affected age
 <conventions>
 ## Shared Conventions
 
-**Brand Isolation:** All clients share Neo4j and Pinecone infrastructure. Isolation is via `brand_id` property on every node and vector namespace (`{type}-{brand_id}`). Never query without filtering by brand_id.
+**Brand Isolation:** All clients share Neo4j and Pinecone infrastructure. These databases contain existing data from other applications — Droom data is isolated via `brand_id` property on every node, `Droom` label on all Droom-created nodes, and vector namespace prefix `droom-` (`droom-{type}-{brand_id}`). Never query without filtering by brand_id and Droom label.
 
 **Directory Pattern:** Client directories follow a consistent structure. All agents create outputs within `clients/{name}/`. The directory structure is not rigidly prescribed — agents create what they need — but the top-level categories (research, strategy, creative, automation, dashboard, website, database, integration) are consistent.
 
@@ -111,13 +111,14 @@ User Request → Orchestrator → reads .manifest.md → determines affected age
 **Neo4j (Graph Database)** — Structured facts and relationships:
 - Stores: Content nodes, Campaign nodes, Performance records, Lead/Customer data, Demographic profiles, Geographic areas
 - Relationships encode meaning: `(Content)-[:HAS_TONE]->(Tone)`, `(Campaign)-[:TARGETED]->(Demographic)`, `(Lead)-[:CAME_FROM]->(Campaign)`
-- Shared attribute nodes (Tone, Aesthetic, ColorPalette, Composition, Platform, TimeSlot) have no brand_id — they're universal
+- All Droom-created nodes carry an additional `:Droom` label to distinguish from existing database content (e.g., `:Droom:Content`, `:Droom:Campaign`)
+- Shared attribute nodes (`:Droom:Tone`, `:Droom:Aesthetic`, `:Droom:ColorPalette`, `:Droom:Composition`, `:Droom:Platform`, `:Droom:TimeSlot`) have no brand_id — universal within Droom
 - Learned relationships grow over time: `(Demographic)-[:RESPONDS_TO {avg_roas, sample_size}]->(Tone)`
 - Queried by: n8n workflows (performance data, content metadata), dashboard backend (all views), lead management
 
 **Pinecone (Vector Database)** — Semantic memory and similarity search:
-- Single index: `marketing-automation`, isolated by namespaces: `{type}-{brand_id}`
-- 5 namespace types: content-essence (semantic content profiles), scenario-outcomes (historical campaign results), audience-psychographics (behavioral patterns), narrative-patterns (storytelling approaches), cross-campaign-learnings (shared across all brands)
+- Single index: `graphelion-deux` (shared with other applications), isolated by namespaces: `droom-{type}-{brand_id}`
+- 5 namespace types per client: droom-content-essence-{brand_id}, droom-scenario-outcomes-{brand_id}, droom-audience-psychographics-{brand_id}, droom-narrative-patterns-{brand_id}, droom-cross-campaign-learnings (shared across all Droom brands)
 - Embedding model: OpenAI text-embedding-3-small (1536 dimensions)
 - Queried by: n8n workflows ("find similar content", "what happened in similar situations?"), runtime agents (context for decisions)
 
@@ -175,7 +176,7 @@ User Request → Orchestrator → reads .manifest.md → determines affected age
 After initial build, the client system runs autonomously via n8n:
 
 **Core Workflows:**
-1. Content Ingestion — Triggered by Google Drive upload, analyzes content with Claude Vision, stores in both databases
+1. Content Ingestion — Triggered by AWS S3 upload, analyzes content with Claude Vision, stores in both databases
 2. Daily Performance Analysis — 2 AM daily, fetches platform data, CSO agent makes optimization decisions
 3. Weekly Strategy Review — Monday 3 AM, all 6 agents analyze the week, generates client report
 4. Creative Rotation — 1 AM daily, detects fatigued content, finds and deploys replacements

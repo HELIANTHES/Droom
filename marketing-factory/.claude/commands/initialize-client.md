@@ -105,9 +105,10 @@ Execute phases sequentially. Each phase depends on the output of the previous ph
 **Action:** Ask user if they want to configure any credentials now
 **Verify:** All integration files exist
 
-### Phase 9: Google Drive Setup
+### Phase 9: AWS S3 Storage Setup
 **Spec:** system-specs/credentials-and-setup.md
-**Output:** `integration/google-drive-structure.md` — Required folder structure and setup instructions
+**Action:** Create S3 bucket `droom` if it doesn't exist, then create key prefix structure: `s3://droom/clients/{brand_id}/content/`, `s3://droom/clients/{brand_id}/archive/`, `s3://droom/clients/{brand_id}/drafts/`. Requires AWS credentials from .env.
+**Output:** `integration/s3-structure.md` — S3 key structure and upload instructions
 
 ### Phase 10: QA Validation
 **Agent:** qa
