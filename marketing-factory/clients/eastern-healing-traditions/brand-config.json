@@ -1,0 +1,263 @@
+{
+  "brand_id": "eastern-healing-traditions",
+  "brand_name": "Eastern Healing Traditions",
+  "industry": "healthcare-alternative-medicine",
+  "business_model": "brick-and-mortar-primary",
+  "service_delivery_model": "in-person-appointments",
+  "tagline": "Relieve your pain, return you to health, & maintain your lasting wellness without side effects",
+
+  "contact": {
+    "phone": "(224) 541-0022",
+    "email": "info@easternhealingtraditions.com",
+    "website": "https://easternhealingtraditions.com",
+    "address": "34121 US-45, Grayslake, IL 60030",
+    "coordinates": {
+      "lat": 42.3447,
+      "lng": -87.9967
+    }
+  },
+
+  "brand_colors": {
+    "primary": "#1a6b5a",
+    "secondary": "#2d3436",
+    "accent": "#c9a96e",
+    "background": "#f8f9fa",
+    "text": "#2d3436"
+  },
+
+  "brand_voice": {
+    "tone": "professional-warm-educational",
+    "personality": "Knowledgeable healer who listens first, explains clearly, and lets results speak",
+    "avoid": "mystical/spiritual jargon, aggressive sales language, unsubstantiated claims, fear-based messaging"
+  },
+
+  "services": [
+    "Acupuncture",
+    "Chinese Herbal Medicine",
+    "Eastern Nutrition / Food-Therapy",
+    "Dry Needling",
+    "Moxibustion",
+    "Microacupuncture 48 (MA48) / Electroacupuncture",
+    "Tui-na, Guasha & Cupping"
+  ],
+
+  "condition_categories": [
+    "Chronic Pain Relief",
+    "Autoimmune Disorders",
+    "Neuropathy",
+    "Women's Health",
+    "Men's Health",
+    "General Wellness"
+  ],
+
+  "demographics": {
+    "primary": {
+      "name": "chronic-pain-seekers-40-65",
+      "display_name": "Pain Relief Seekers",
+      "age_range": "40-65",
+      "gender": "all",
+      "life_stage": "Established adults managing chronic pain conditions",
+      "income_level": "middle-to-upper ($75K-150K household)",
+      "psychographics": {
+        "motivations": "Find lasting pain relief, avoid surgery, reduce medication dependency",
+        "pain_points": "Years of chronic pain, frustrated with conventional treatments, skeptical of alternatives but desperate for relief",
+        "values": "Quality of life, independence, evidence-based results, personal attention from practitioners"
+      },
+      "media_consumption": "Facebook, Google search for health conditions, YouTube health content, local community groups",
+      "purchase_journey": "Research-heavy — searches conditions, reads reviews, needs trust signals before booking"
+    },
+    "secondary": {
+      "name": "autoimmune-wellness-women-30-55",
+      "display_name": "Autoimmune Warriors",
+      "age_range": "30-55",
+      "gender": "female-skew",
+      "life_stage": "Managing ongoing autoimmune conditions, balancing health with career/family",
+      "income_level": "middle-to-upper ($65K-130K household)",
+      "psychographics": {
+        "motivations": "Complement conventional treatment, reduce flare-ups, minimize medication side effects, feel in control of health",
+        "pain_points": "Unpredictable symptoms, medication side effects, feeling dismissed by conventional doctors, information overload",
+        "values": "Holistic wellness, body-mind connection, natural approaches, practitioner who listens"
+      },
+      "media_consumption": "Instagram, Facebook health groups, wellness podcasts, condition-specific online communities",
+      "purchase_journey": "Community-influenced — trusts recommendations from support groups and fellow patients"
+    },
+    "tertiary": {
+      "name": "proactive-wellness-adults-28-50",
+      "display_name": "Wellness Optimizers",
+      "age_range": "28-50",
+      "gender": "all",
+      "life_stage": "Health-conscious adults interested in preventative care and optimization",
+      "income_level": "upper-middle ($90K-200K household)",
+      "psychographics": {
+        "motivations": "Optimize health, prevent future problems, explore Eastern medicine modalities, biohacking mindset",
+        "pain_points": "Want proactive care but don't know where to start with TCM, concerned about needle anxiety",
+        "values": "Prevention over cure, education, evidence-based wellness, quality over price"
+      },
+      "media_consumption": "Instagram, YouTube, wellness apps, health & fitness content, podcasts",
+      "purchase_journey": "Education-first — wants to understand TCM before committing, responds to educational content"
+    }
+  },
+
+  "platforms": {
+    "google-search": {
+      "objective": "capture-high-intent",
+      "formats": ["search-ads", "local-service-ads"],
+      "rationale": "Highest-intent channel — people searching 'acupuncture for [condition] near me' are ready to book",
+      "estimated_cpm": 45,
+      "budget_percentage": 40
+    },
+    "facebook": {
+      "objective": "education-awareness-retargeting",
+      "formats": ["single-image", "carousel", "video", "lead-forms"],
+      "rationale": "Primary demographic (40-65 chronic pain) is Facebook-heavy. Patient story ads perform well. Retargeting website visitors.",
+      "estimated_cpm": 12,
+      "budget_percentage": 30
+    },
+    "instagram": {
+      "objective": "brand-awareness-education",
+      "formats": ["reels", "stories", "carousel", "single-image"],
+      "rationale": "Secondary and tertiary demographics active here. Visual content (treatment process, patient stories, educational) works well. Wellness aesthetic alignment.",
+      "estimated_cpm": 10,
+      "budget_percentage": 15
+    },
+    "youtube": {
+      "objective": "education-trust-building",
+      "formats": ["in-stream-skippable", "discovery-ads"],
+      "rationale": "Patient testimonial videos and 'what to expect' content addresses needle anxiety and builds trust. Long-form education for research-heavy audience.",
+      "estimated_cpm": 8,
+      "budget_percentage": 15
+    }
+  },
+
+  "budget": {
+    "monthly_total": 3000,
+    "currency": "USD",
+    "allocation": {
+      "google-search": 1200,
+      "facebook": 900,
+      "instagram": 450,
+      "youtube": 450
+    },
+    "test_allocation_percentage": 15,
+    "notes": "Budget assumes sole practitioner with limited appointment slots. Scale carefully to avoid overbooking."
+  },
+
+  "campaign_goals": {
+    "primary_kpi": "qualified-leads",
+    "primary_target": "25-35 qualified leads per month",
+    "secondary_kpis": [
+      {
+        "metric": "cost-per-lead",
+        "target": "$85-120",
+        "notes": "High-value service justifies higher CPL"
+      },
+      {
+        "metric": "website-booking-rate",
+        "target": "4-6% of website visitors",
+        "notes": "Conversion rate for appointment booking form"
+      },
+      {
+        "metric": "google-business-calls",
+        "target": "15-25 calls per month",
+        "notes": "Phone calls from Google Business Profile and ads"
+      }
+    ],
+    "conversion_events": [
+      "appointment_booked",
+      "phone_call",
+      "contact_form_submitted",
+      "directions_clicked"
+    ]
+  },
+
+  "geographic_strategy": {
+    "type": "radius-based",
+    "center": "34121 US-45, Grayslake, IL 60030",
+    "zones": [
+      {
+        "name": "core",
+        "radius_miles": 10,
+        "budget_weight": 0.50,
+        "areas": "Grayslake, Round Lake, Mundelein, Libertyville, Gurnee, Waukegan"
+      },
+      {
+        "name": "extended",
+        "radius_miles": 20,
+        "budget_weight": 0.35,
+        "areas": "Vernon Hills, Lake Forest, Highland Park, Antioch, Crystal Lake, McHenry"
+      },
+      {
+        "name": "metro",
+        "radius_miles": 35,
+        "budget_weight": 0.15,
+        "areas": "Northern Chicago suburbs, Evanston, Schaumburg, Elgin"
+      }
+    ]
+  },
+
+  "content_strategy": {
+    "monthly_volume": {
+      "videos": 4,
+      "images": 12,
+      "graphics": 8
+    },
+    "content_themes": [
+      "Patient transformation stories (before/after narratives)",
+      "Condition education (what TCM can do for [condition])",
+      "Treatment demystification (what to expect, needle anxiety)",
+      "Dr. Vel expertise/authority (credentials, experience)",
+      "Men's health awareness (underserved niche)"
+    ],
+    "platform_adaptations": {
+      "google-search": "Condition-specific ad copy with strong CTAs and location extensions",
+      "facebook": "Patient story carousels, educational posts, testimonial videos, retargeting",
+      "instagram": "Wellness aesthetic reels, treatment process glimpses, educational carousels",
+      "youtube": "Patient testimonial videos, 'What to expect' walkthroughs, condition deep-dives"
+    }
+  },
+
+  "competitive_positioning": {
+    "positioning_statement": "The highest-credentialed TCM practitioner in Lake County, with documented results for conditions that conventional medicine couldn't resolve",
+    "differentiation_pillars": [
+      "DACM credential — highest TCM qualification, surpassing all local competitors",
+      "7 therapeutic modalities — most comprehensive treatment range in the area",
+      "Documented patient outcomes — surgery cancellations, chronic condition reversals in 3-5 sessions",
+      "Education-first approach — patients understand their treatment, not just receive it"
+    ],
+    "messaging_hierarchy": {
+      "primary": "When Western medicine isn't enough — proven results from the highest-credentialed TCM doctor in Lake County",
+      "secondary": "7 healing modalities, one practitioner who listens — personalized treatment plans that work",
+      "tertiary": "44 five-star reviews, patients canceling surgeries, chronic conditions resolved — see the results for yourself"
+    }
+  },
+
+  "tracking": {
+    "google_analytics_id": "",
+    "google_ads_conversion_id": "",
+    "google_ads_conversion_label": "",
+    "meta_pixel_id": ""
+  },
+
+  "funnel_strategy": {
+    "awareness": {
+      "platforms": ["facebook", "instagram", "youtube"],
+      "content": "Educational content, brand story, condition awareness",
+      "kpi": "reach, video views, engagement rate"
+    },
+    "consideration": {
+      "platforms": ["facebook", "instagram", "youtube", "google-search"],
+      "content": "Patient testimonials, treatment explainers, Dr. Vel credibility",
+      "kpi": "website visits, time on site, pages per session"
+    },
+    "conversion": {
+      "platforms": ["google-search", "facebook"],
+      "content": "Direct response ads, booking CTAs, retargeting",
+      "kpi": "leads, cost per lead, booking rate"
+    },
+    "retention": {
+      "platforms": ["email", "facebook"],
+      "content": "Treatment follow-up, wellness tips, referral program",
+      "kpi": "repeat bookings, referral rate, lifetime value"
+    }
+  }
+}

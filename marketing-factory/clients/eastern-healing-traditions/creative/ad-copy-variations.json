@@ -1,0 +1,212 @@
+{
+  "brand_id": "eastern-healing-traditions",
+  "generated": "2026-02-08",
+  "variations": [
+    {
+      "id": "copy-01",
+      "demographic": "pain-relief-seekers-40-65",
+      "platform": "google-search",
+      "funnel_stage": "conversion",
+      "format": "search-ad",
+      "headline_1": "Chronic Pain Relief Grayslake",
+      "headline_2": "DACM-Certified Acupuncture",
+      "headline_3": "Book a Consultation Today",
+      "description_1": "Patients canceled planned surgeries after 3 sessions. Highest-credentialed TCM doctor in Lake County.",
+      "description_2": "7 modalities, individualized treatment plans. Pain relief without side effects. (224) 541-0022.",
+      "cta": "Book Your Consultation"
+    },
+    {
+      "id": "copy-02",
+      "demographic": "pain-relief-seekers-40-65",
+      "platform": "facebook",
+      "funnel_stage": "consideration",
+      "format": "single-image-ad",
+      "primary_text": "You have tried the medications. You have done the physical therapy. You may even have surgery on the calendar.\n\nBefore you go under the knife, there is something worth knowing: patients at Eastern Healing Traditions have canceled planned surgeries after as few as three acupuncture sessions.\n\nThat is not a marketing claim. It is what happened for Patricia, who came in with sciatica so severe she could barely walk. After five sessions, she reported 95% pain relief — and canceled the shoulder surgery she had been dreading.\n\nOr Patsy, who lived with chronic shoulder pain for twenty years. Three treatments. Twenty years of pain, resolved.\n\nDr. Vel Natarajan holds a DACM — the highest credential in Traditional Chinese Medicine. He does not guess. He conducts a thorough evaluation, explains exactly what is happening in your body, and builds a treatment plan specific to your condition, your history, and your life.\n\nThis is not about replacing your doctor. It is about exploring what becomes possible when you add 3,000 years of proven medicine to your care.\n\nIf you are living with chronic pain and nothing has worked well enough, a conversation costs you nothing but a phone call.",
+      "headline": "When Western Medicine Isn't Enough",
+      "description": "DACM-Certified | Grayslake, IL",
+      "cta": "Learn More"
+    },
+    {
+      "id": "copy-03",
+      "demographic": "pain-relief-seekers-40-65",
+      "platform": "youtube",
+      "funnel_stage": "awareness",
+      "format": "in-stream-skippable",
+      "headline": "Chronic Pain Doesn't Have to Be Permanent",
+      "description": "Dr. Vel Natarajan, DACM, explains how acupuncture and Traditional Chinese Medicine have helped patients avoid surgery and resolve decades-long pain conditions. Eastern Healing Traditions, Grayslake, IL.",
+      "script_hook": "What if the pain you have been living with for years could be resolved in three to five sessions — without surgery, without more medication? I am Dr. Vel Natarajan, and I have seen it happen hundreds of times.",
+      "cta": "Learn More About Treatment"
+    },
+    {
+      "id": "copy-04",
+      "demographic": "pain-relief-seekers-40-65",
+      "platform": "google-search",
+      "funnel_stage": "conversion",
+      "format": "search-ad",
+      "headline_1": "Sciatica Relief Without Surgery",
+      "headline_2": "Acupuncture in Lake County",
+      "headline_3": "95% Relief in 5 Visits",
+      "description_1": "Dr. Vel Natarajan, DACM. Patients report significant pain relief in as few as 3 sessions.",
+      "description_2": "Thorough evaluation, personalized plan, 7 modalities. Grayslake, IL. (224) 541-0022.",
+      "cta": "Schedule Your Visit"
+    },
+    {
+      "id": "copy-05",
+      "demographic": "pain-relief-seekers-40-65",
+      "platform": "facebook",
+      "funnel_stage": "conversion",
+      "format": "single-image-ad",
+      "primary_text": "Eric came in unable to grip a coffee mug. Three sessions later, full range of motion and grip strength restored.\n\nChronic pain does not have to be your normal. Dr. Vel Natarajan, DACM, has helped patients resolve conditions that lasted five, ten, even twenty years.\n\nEastern Healing Traditions offers 7 therapeutic modalities — acupuncture, herbal medicine, dry needling, electroacupuncture, and more — so your treatment plan is built around your specific condition, not a one-size-fits-all approach.\n\nGrayslake, IL. Call (224) 541-0022 or book online.",
+      "headline": "Resolve Chronic Pain — Book Today",
+      "description": "7 Modalities | Grayslake, IL",
+      "cta": "Book Now"
+    },
+    {
+      "id": "copy-06",
+      "demographic": "pain-relief-seekers-40-65",
+      "platform": "instagram",
+      "funnel_stage": "awareness",
+      "format": "single-image-ad",
+      "primary_text": "Twenty years of chronic shoulder pain. Three acupuncture sessions. Resolved.\n\nThat is a real patient outcome at Eastern Healing Traditions. Dr. Vel Natarajan holds a DACM — the highest credential in Traditional Chinese Medicine — and offers seven therapeutic modalities to treat pain at its root, not just manage the symptoms.\n\nIf conventional treatments have not given you the relief you need, it may be time to explore what Eastern medicine can do.\n\nGrayslake, IL | easternhealingtraditions.com",
+      "headline": "When Nothing Else Has Worked",
+      "cta": "Learn More"
+    },
+    {
+      "id": "copy-07",
+      "demographic": "autoimmune-warriors-30-55",
+      "platform": "facebook",
+      "funnel_stage": "awareness",
+      "format": "single-image-ad",
+      "primary_text": "If you are managing an autoimmune condition — Hashimoto's, Crohn's, lupus, ulcerative colitis, psoriatic arthritis — you already know the cycle. Flare. Medication adjustment. Side effects. Temporary stability. Repeat.\n\nYou are not imagining that something is missing from your care. There is an entire system of medicine that has been treating these conditions for thousands of years, and it works alongside the treatment you are already receiving.\n\nTraditional Chinese Medicine approaches autoimmune conditions differently. Instead of suppressing the immune response, TCM works to restore balance — reducing inflammation, calming overactive immune pathways, and supporting your body's ability to regulate itself.\n\nDr. Vel Natarajan, DACM, is the highest-credentialed TCM practitioner in Lake County. He treats autoimmune conditions with a combination of acupuncture, Chinese herbal medicine, and Eastern nutrition therapy — a comprehensive approach that addresses the root cause, not just the symptoms you report to your specialist.\n\nThis is not about replacing your rheumatologist or gastroenterologist. It is about filling the gap they cannot.\n\nEastern Healing Traditions | Grayslake, IL",
+      "headline": "Your Autoimmune Care Has a Gap",
+      "description": "TCM for Autoimmune Conditions",
+      "cta": "Learn More"
+    },
+    {
+      "id": "copy-08",
+      "demographic": "autoimmune-warriors-30-55",
+      "platform": "google-search",
+      "funnel_stage": "conversion",
+      "format": "search-ad",
+      "headline_1": "Autoimmune Relief With TCM",
+      "headline_2": "Crohn's Lupus Hashimoto's",
+      "headline_3": "DACM Doctor | Grayslake",
+      "description_1": "Reduce flare-ups and medication side effects with acupuncture and herbal medicine.",
+      "description_2": "Dr. Vel Natarajan, DACM. Thorough evaluation, personalized treatment. (224) 541-0022.",
+      "cta": "Book Your Consultation"
+    },
+    {
+      "id": "copy-09",
+      "demographic": "autoimmune-warriors-30-55",
+      "platform": "instagram",
+      "funnel_stage": "consideration",
+      "format": "carousel-ad",
+      "primary_text": "Your specialist manages your labs. But who is addressing the fatigue, the brain fog, the inflammation that never fully goes away?\n\nTraditional Chinese Medicine does not replace your conventional care — it fills the gap. Acupuncture, herbal medicine, and Eastern nutrition work together to calm overactive immune responses, reduce flare frequency, and help you feel like yourself again.\n\nDr. Vel Natarajan, DACM, specializes in autoimmune conditions at Eastern Healing Traditions in Grayslake, IL. Swipe to learn how TCM supports Hashimoto's, Crohn's, lupus, and more.",
+      "headline": "Fill the Gap in Your Care",
+      "cta": "Learn More"
+    },
+    {
+      "id": "copy-10",
+      "demographic": "autoimmune-warriors-30-55",
+      "platform": "youtube",
+      "funnel_stage": "consideration",
+      "format": "discovery-ad",
+      "headline": "How TCM Treats Autoimmune Conditions",
+      "description": "Dr. Vel Natarajan, DACM, explains how acupuncture and Chinese herbal medicine complement conventional autoimmune treatment — reducing flares, easing side effects, and restoring balance. Eastern Healing Traditions, Grayslake, IL.",
+      "script_hook": "If you have been told your autoimmune condition is something you just have to live with, I want to show you what becomes possible when you add Traditional Chinese Medicine to your care.",
+      "cta": "Watch the Full Explanation"
+    },
+    {
+      "id": "copy-11",
+      "demographic": "autoimmune-warriors-30-55",
+      "platform": "facebook",
+      "funnel_stage": "consideration",
+      "format": "video-ad",
+      "primary_text": "Jenna came in struggling with hormonal imbalance and digestive issues that her doctors had been managing with medication for years. Within two months of treatment with Dr. Vel — combining acupuncture, herbal medicine, and Eastern nutrition — she reported that both conditions had resolved.\n\nTwo months. After years of managing symptoms.\n\nDr. Vel Natarajan holds a DACM, the highest credential in Traditional Chinese Medicine. His approach is thorough: a comprehensive health history, a hands-on evaluation, and a treatment plan that addresses the root cause — not just the symptom that shows up on your lab work.\n\nIf your autoimmune condition is being managed but not truly addressed, there may be more that medicine can do for you.\n\nEastern Healing Traditions | Grayslake, IL\n(224) 541-0022 | easternhealingtraditions.com",
+      "headline": "Beyond Managing — Actually Resolving",
+      "description": "DACM-Certified TCM | Grayslake",
+      "cta": "Learn More"
+    },
+    {
+      "id": "copy-12",
+      "demographic": "wellness-optimizers-28-50",
+      "platform": "instagram",
+      "funnel_stage": "awareness",
+      "format": "reels-ad",
+      "primary_text": "You optimize your nutrition. You train intentionally. You meditate. But have you considered what 3,000 years of Eastern medicine can add to your wellness practice?\n\nAcupuncture is not just for pain. It supports digestion, sleep quality, stress resilience, energy, and immune function — helping your body work the way it is designed to.\n\nDr. Vel Natarajan, DACM | Eastern Healing Traditions | Grayslake, IL",
+      "headline": "The Missing Piece in Your Wellness",
+      "cta": "Explore TCM"
+    },
+    {
+      "id": "copy-13",
+      "demographic": "wellness-optimizers-28-50",
+      "platform": "youtube",
+      "funnel_stage": "awareness",
+      "format": "in-stream-skippable",
+      "headline": "What Acupuncture Actually Does to Your Body",
+      "description": "Most people think acupuncture is only for pain. Dr. Vel Natarajan, DACM, explains the science behind how acupuncture optimizes digestion, sleep, stress response, and immune function. Eastern Healing Traditions, Grayslake, IL.",
+      "script_hook": "You eat clean, you train hard, you take your supplements. But there is a 3,000-year-old system of medicine that could be the thing tying it all together — and it is probably not what you think.",
+      "cta": "Learn How TCM Works"
+    },
+    {
+      "id": "copy-14",
+      "demographic": "wellness-optimizers-28-50",
+      "platform": "facebook",
+      "funnel_stage": "consideration",
+      "format": "carousel-ad",
+      "primary_text": "Acupuncture is not a last resort. It is a first choice for people who take their health seriously.\n\nAt Eastern Healing Traditions, Dr. Vel Natarajan uses seven therapeutic modalities — acupuncture, Chinese herbal medicine, Eastern nutrition therapy, electroacupuncture, moxibustion, dry needling, and manual therapies — to help patients optimize how their bodies function.\n\nWhether you want better sleep, stronger digestion, more consistent energy, or a resilient immune system, TCM offers a framework that complements everything else you are already doing.\n\nDr. Vel holds a DACM — the highest credential in Traditional Chinese Medicine. Your wellness routine deserves that level of expertise.\n\nSwipe to see the 7 modalities and what each one does.\n\nEastern Healing Traditions | Grayslake, IL\n(224) 541-0022",
+      "headline": "7 Modalities, One Practitioner",
+      "description": "Optimize Your Wellness with TCM",
+      "cta": "Learn More"
+    },
+    {
+      "id": "copy-15",
+      "demographic": "wellness-optimizers-28-50",
+      "platform": "instagram",
+      "funnel_stage": "consideration",
+      "format": "single-image-ad",
+      "primary_text": "Celeste had numbness in her hands for years. After treatment with Dr. Vel, she completed a 100-mile bike ride.\n\nThat is what happens when your body is functioning the way it should. Acupuncture and Traditional Chinese Medicine do not just treat symptoms — they restore the systems that keep you performing at your best.\n\nDr. Vel Natarajan, DACM — the highest-credentialed TCM doctor in Lake County.\n\nEastern Healing Traditions | Grayslake, IL",
+      "headline": "Restore Your Full Potential",
+      "cta": "Book a Consultation"
+    },
+    {
+      "id": "copy-16",
+      "demographic": "wellness-optimizers-28-50",
+      "platform": "google-search",
+      "funnel_stage": "conversion",
+      "format": "search-ad",
+      "headline_1": "Acupuncture Grayslake IL",
+      "headline_2": "DACM Doctor | 7 Modalities",
+      "headline_3": "Preventative Wellness TCM",
+      "description_1": "Optimize digestion, sleep, energy, and immune function with Traditional Chinese Medicine.",
+      "description_2": "Dr. Vel Natarajan, DACM. Personalized treatment plans. Book today: (224) 541-0022.",
+      "cta": "Book Your Consultation"
+    },
+    {
+      "id": "copy-17",
+      "demographic": "pain-relief-seekers-40-65",
+      "platform": "google-search",
+      "funnel_stage": "consideration",
+      "format": "search-ad",
+      "headline_1": "Avoid Surgery — Try TCM First",
+      "headline_2": "DACM Acupuncture Grayslake",
+      "headline_3": "Patients Cancel Surgeries",
+      "description_1": "Real patients have canceled planned surgeries after acupuncture with Dr. Vel Natarajan, DACM. Results in as few as 3 sessions.",
+      "description_2": "Fibromyalgia, sciatica, arthritis, migraines — 7 modalities for comprehensive pain relief. (224) 541-0022.",
+      "cta": "See Patient Results"
+    },
+    {
+      "id": "copy-18",
+      "demographic": "autoimmune-warriors-30-55",
+      "platform": "google-search",
+      "funnel_stage": "consideration",
+      "format": "search-ad",
+      "headline_1": "TCM for Hashimoto's & Crohn's",
+      "headline_2": "Complement Your Current Care",
+      "headline_3": "DACM Doctor — Lake County",
+      "description_1": "Reduce flare-ups, ease medication side effects, and restore balance. Acupuncture and herbal medicine for autoimmune conditions.",
+      "description_2": "Dr. Vel Natarajan, DACM — highest TCM credential. Grayslake, IL. Book a consultation: (224) 541-0022.",
+      "cta": "Book Your Consultation"
+    }
+  ]
+}
