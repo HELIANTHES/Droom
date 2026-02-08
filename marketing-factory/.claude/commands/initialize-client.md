@@ -110,10 +110,6 @@ Execute phases sequentially. Each phase depends on the output of the previous ph
 **Action:** Create S3 bucket `droom` if it doesn't exist, then create key prefix structure: `s3://droom/clients/{brand_id}/content/`, `s3://droom/clients/{brand_id}/archive/`, `s3://droom/clients/{brand_id}/drafts/`. Requires AWS credentials from .env.
 **Output:** `integration/s3-structure.md` — S3 key structure and upload instructions
 
-### Phase 10: QA Validation
-**Agent:** qa
-**Input:** All generated files
-**Output:** `QA-REPORT.md` — Pass/fail checklist for all validation checks
 </orchestration>
 
 <context_flow>
@@ -126,8 +122,6 @@ Each agent appends decisions, discoveries, and warnings to `.build-context.md`. 
 - Phase 4 → Phase 5: Creative direction drives content planning
 - Phase 3 → Phase 6: Business model determines which database nodes to create
 - Phase 6 → Phase 8: Schema details inform integration configuration
-- All phases → Phase 10: QA validates everything produced
-
 After all phases, update `.manifest.md` with complete system state.
 </context_flow>
 
@@ -135,13 +129,11 @@ After all phases, update `.manifest.md` with complete system state.
 - If any phase fails, report the error clearly and ask the user to retry or skip
 - Do not proceed to a dependent phase if its prerequisite failed
 - If web_fetch or web_search fails, ask user to provide a `file` input instead
-- If a phase produces incomplete output, note it in the QA report
 - The command is re-runnable — skip completed phases by checking which output files already exist
 </error_handling>
 
 <completion>
 After all phases, display a summary showing:
-- All files created with paths (grouped by: Research & Strategy, Creative Direction, System Configuration, Validation)
-- QA report summary (critical pass/fail counts)
+- All files created with paths (grouped by: Research & Strategy, Creative Direction, System Configuration)
 - Next steps: add brand assets, generate proposal (`/generate-proposal`), configure credentials, run database init (if skipped), build automation/dashboard/website
 </completion>
