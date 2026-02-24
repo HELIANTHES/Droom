@@ -1,10 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -22,13 +19,23 @@ const config: Config = {
           dark: "#b8944f",
           light: "#d4ba85",
         },
-        background: "#f8f9fa",
+        cream: "#FFFCF7",
+        warm: {
+          50: "#FAF8F5",
+          100: "#F5F0EB",
+          200: "#EBE3DA",
+          300: "#DDD2C4",
+        },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
-      lineHeight: {
-        relaxed: "1.6",
+      letterSpacing: {
+        label: "0.12em",
+      },
+      maxWidth: {
+        content: "1140px",
       },
     },
   },

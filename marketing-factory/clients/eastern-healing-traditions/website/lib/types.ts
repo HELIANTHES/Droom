@@ -6,6 +6,12 @@ export interface Service {
   whatToExpect: string;
   conditions: string[];
   icon: string;
+  heroImage: string;
+  howItWorks: string;
+  tcmPerspective: string;
+  researchBasis: string;
+  relatedConditions: string[];
+  relatedTestimonial?: string;
 }
 
 export interface Condition {
@@ -14,13 +20,35 @@ export interface Condition {
   description: string;
   examples: string[];
   icon: string;
+  heroImage: string;
+  overview: string;
+  howTCMHelps: string;
+  modalities: string[];
+  relatedTestimonial?: string;
 }
 
 export interface Testimonial {
   name: string;
+  slug: string;
   condition: string;
   outcome: string;
   quote: string;
+  duration: string;
+  priorTreatments: string;
+  treatment: string;
+  sessionsToResult: string;
+  conditionCategory: string;
+}
+
+export interface FirstVisitStep {
+  step: number;
+  title: string;
+  description: string;
+}
+
+export interface FAQ {
+  question: string;
+  answer: string;
 }
 
 export interface UTMParams {

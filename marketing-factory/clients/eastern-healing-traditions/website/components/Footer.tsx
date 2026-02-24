@@ -1,60 +1,70 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div>
-            <h3 className="text-lg font-bold text-accent mb-4">
-              Eastern Healing Traditions
-            </h3>
-            <p className="text-gray-300 leading-relaxed mb-4">
+    <footer className="bg-secondary text-white/80">
+      <div className="content-width py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+          <div className="md:col-span-5">
+            <Image
+              src="/logo.png"
+              alt="Eastern Healing Traditions"
+              width={180}
+              height={45}
+              className="mb-6"
+            />
+            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
               Relieve your pain, return you to health, and maintain your lasting
-              wellness without side effects.
-            </p>
-            <p className="text-gray-400 text-sm">
-              Dr. Vel Natarajan, DACM
+              wellness — without side effects.
             </p>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-white mb-4">Quick Links</h4>
-            <nav className="flex flex-col gap-2">
-              <Link href="/services" className="text-gray-300 hover:text-accent transition-colors">
-                Services
-              </Link>
-              <Link href="/about" className="text-gray-300 hover:text-accent transition-colors">
-                About Dr. Vel
-              </Link>
-              <Link href="/book" className="text-gray-300 hover:text-accent transition-colors">
-                Book Appointment
-              </Link>
-              <Link href="/contact" className="text-gray-300 hover:text-accent transition-colors">
-                Contact
-              </Link>
+          <div className="md:col-span-3">
+            <p className="label text-white/40 mb-4">Navigate</p>
+            <nav className="flex flex-col gap-3">
+              {[
+                { href: "/services", label: "Services" },
+                { href: "/conditions", label: "Conditions" },
+                { href: "/healing-stories", label: "Healing Stories" },
+                { href: "/first-visit", label: "Your First Visit" },
+                { href: "/about", label: "About Dr. Vel" },
+                { href: "/book", label: "Book Appointment" },
+                { href: "/contact", label: "Contact" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-white/60 hover:text-accent transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </nav>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-white mb-4">Contact</h4>
-            <div className="flex flex-col gap-2 text-gray-300">
-              <a href="tel:+12245410022" className="hover:text-accent transition-colors">
+          <div className="md:col-span-4">
+            <p className="label text-white/40 mb-4">Contact</p>
+            <div className="flex flex-col gap-3 text-sm">
+              <a href="tel:+12245410022" className="text-white/60 hover:text-accent transition-colors">
                 (224) 541-0022
               </a>
               <a
                 href="mailto:info@easternhealingtraditions.com"
-                className="hover:text-accent transition-colors"
+                className="text-white/60 hover:text-accent transition-colors"
               >
                 info@easternhealingtraditions.com
               </a>
-              <p>34121 US-45, Grayslake, IL 60030</p>
+              <p className="text-white/60">
+                34121 US-45<br />
+                Grayslake, IL 60030
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-600 mt-10 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} Eastern Healing Traditions. All rights reserved.</p>
+        <div className="border-t border-white/10 mt-16 pt-8 text-white/30 text-xs">
+          &copy; {new Date().getFullYear()} Eastern Healing Traditions. All rights reserved.
         </div>
       </div>
     </footer>
