@@ -1,6 +1,6 @@
 marketing-factory/system-knowledge/
 marketing-factory/versions/*
-marketing-factory/
+
 
 marketing-factory/.env
 */**/.env

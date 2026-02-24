@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://easternhealingtraditions.com/sitemap.xml

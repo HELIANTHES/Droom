@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "created": "2026-02-19",
+  "updated": "2026-02-19",
+  "brand_id": "eastern-healing-traditions",
+  "business_model": "brick-and-mortar-primary",
+  "workflows": {
+    "content-ingestion": { "version": "1.0.0", "trigger": "s3-event", "schedule": "on-upload" },
+    "daily-performance": { "version": "1.0.0", "trigger": "cron", "schedule": "0 2 * * *" },
+    "weekly-strategy": { "version": "1.0.0", "trigger": "cron", "schedule": "0 3 * * 1" },
+    "creative-rotation": { "version": "1.0.0", "trigger": "cron", "schedule": "0 1 * * *" },
+    "budget-optimization": { "version": "1.0.0", "trigger": "cron", "schedule": "30 3 * * *" },
+    "learn-and-remember": { "version": "1.0.0", "trigger": "cron", "schedule": "0 4 * * *" },
+    "form-ingestion": { "version": "1.0.0", "trigger": "webhook", "schedule": "on-submit" }
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-19",
+      "changes": "Initial workflow suite generation. 7 core workflows for brick-and-mortar service business."
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "name": "[EHT] Content Ingestion",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 300]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eastern-healing-traditions/content-uploaded",
+        "options": {}
+      },
+      "id": "trigger-webhook",
+      "name": "S3 Event Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst s3Key = input.Records?.[0]?.s3?.object?.key || input.s3_key || 'test/sample.jpg';\nconst filename = s3Key.split('/').pop();\nconst ext = filename.split('.').pop().toLowerCase();\nconst isVideo = ['mp4', 'mov', 'avi', 'webm'].includes(ext);\nconst contentId = `eht-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;\n\nreturn [{\n  json: {\n    brand_id: 'eastern-healing-traditions',\n    content_id: contentId,\n    s3_bucket: 'droom',\n    s3_key: s3Key,\n    s3_url: `https://droom.s3.us-east-1.amazonaws.com/${s3Key}`,\n    filename: filename,\n    media_type: isVideo ? 'video' : 'image',\n    format: ext,\n    pinecone_index: 'graphelion-deux',\n    pinecone_namespace: 'droom-content-essence-eastern-healing-traditions',\n    dashboard_base_url: 'http://localhost:3000'\n  }\n}];"
+      },
+      "id": "set-vars",
+      "name": "Set Content Variables",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 180]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 2000,\n  \"system\": \"You are a content analyst for Eastern Healing Traditions, a TCM clinic. Analyze the uploaded content and return JSON with these fields: {semantic_description (150-200 word narrative), tones (array of {name, confidence} from: calm, professional, energetic, playful, aspirational, reassuring, urgent, educational), aesthetics (array of {name, confidence} from: minimal, luxurious, intimate, modern, rustic, vibrant, clean, warm), color_palette (one of: warm-tones, cool-tones, earth-tones, vibrant, pastel, monochrome), composition (one of: close-up, medium-shot, wide-shot, establishing), narrative_elements (array from: shows_physical_space, shows_people, shows_product_service, demonstrates_use, has_dialogue, has_text_overlay), quality_score (0-100)}\",\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": [{\n      \"type\": \"image\",\n      \"source\": {\n        \"type\": \"url\",\n        \"url\": \"{{ $json.s3_url }}\"\n      }\n    }, {\n      \"type\": \"text\",\n      \"text\": \"Analyze this content for Eastern Healing Traditions (TCM clinic in Grayslake, IL). File: {{ $json.filename }}\"\n    }]\n  }]\n}",
+        "options": { "timeout": 90000 }
+      },
+      "id": "claude-vision",
+      "name": "Claude Vision Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 180],
+      "credentials": { "httpHeaderAuth": { "id": "anthropic-api", "name": "anthropic-api" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst vars = $('Set Content Variables').first().json;\nlet analysis;\ntry {\n  const text = response.content[0].text;\n  const match = text.match(/```json\\n?([\\s\\S]*?)\\n?```/) || text.match(/\\{[\\s\\S]*\\}/);\n  analysis = JSON.parse(match ? (match[1] || match[0]) : text);\n} catch (e) {\n  analysis = {\n    semantic_description: 'Content analysis failed - manual review required',\n    tones: [{ name: 'professional', confidence: 0.5 }],\n    aesthetics: [{ name: 'clean', confidence: 0.5 }],\n    color_palette: 'neutral',\n    composition: 'medium-shot',\n    narrative_elements: [],\n    quality_score: 50\n  };\n}\nreturn [{ json: { ...vars, analysis } }];"
+      },
+      "id": "parse-analysis",
+      "name": "Parse Vision Analysis",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 180]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"input\": \"{{ $json.analysis.semantic_description }}\",\n  \"model\": \"text-embedding-3-small\"\n}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "create-embedding",
+      "name": "Create Embedding",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [960, 180],
+      "credentials": { "httpHeaderAuth": { "id": "openai-api", "name": "openai-api" } }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graphelion-deux.svc.pinecone.io/vectors/upsert",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"vectors\": [{\n    \"id\": \"{{ $('Parse Vision Analysis').item.json.content_id }}\",\n    \"values\": {{ JSON.stringify($json.data[0].embedding) }},\n    \"metadata\": {\n      \"brand_id\": \"eastern-healing-traditions\",\n      \"content_id\": \"{{ $('Parse Vision Analysis').item.json.content_id }}\",\n      \"filename\": \"{{ $('Parse Vision Analysis').item.json.filename }}\",\n      \"media_type\": \"{{ $('Parse Vision Analysis').item.json.media_type }}\",\n      \"semantic_description\": \"{{ $('Parse Vision Analysis').item.json.analysis.semantic_description }}\",\n      \"quality_score\": {{ $('Parse Vision Analysis').item.json.analysis.quality_score }},\n      \"status\": \"active\"\n    }\n  }],\n  \"namespace\": \"droom-content-essence-eastern-healing-traditions\"\n}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "upsert-pinecone",
+      "name": "Upsert to Pinecone",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1200, 180],
+      "credentials": { "httpHeaderAuth": { "id": "pinecone-api", "name": "pinecone-api" } }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=MERGE (c:Droom:Content { id: '{{ $('Parse Vision Analysis').item.json.content_id }}' })\nON CREATE SET\n  c.brand_id = 'eastern-healing-traditions',\n  c.s3_key = '{{ $('Parse Vision Analysis').item.json.s3_key }}',\n  c.s3_url = '{{ $('Parse Vision Analysis').item.json.s3_url }}',\n  c.filename = '{{ $('Parse Vision Analysis').item.json.filename }}',\n  c.media_type = '{{ $('Parse Vision Analysis').item.json.media_type }}',\n  c.format = '{{ $('Parse Vision Analysis').item.json.format }}',\n  c.upload_date = datetime(),\n  c.profile_date = datetime(),\n  c.status = 'active',\n  c.semantic_description = '{{ $('Parse Vision Analysis').item.json.analysis.semantic_description }}',\n  c.quality_score = {{ $('Parse Vision Analysis').item.json.analysis.quality_score }},\n  c.total_impressions = 0,\n  c.total_spend = 0.0,\n  c.avg_roas = 0.0\nSET c:{{ $('Parse Vision Analysis').item.json.media_type === 'video' ? 'Video' : 'Image' }}\nRETURN c.id AS content_id, c.filename AS filename"
+      },
+      "id": "neo4j-create-content",
+      "name": "Create Content Node in Neo4j",
+      "type": "n8n-nodes-base.neo4j",
+      "typeVersion": 1,
+      "position": [1440, 180],
+      "credentials": { "neo4j": { "id": "neo4j-db", "name": "neo4j-db" } }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=WITH {{ JSON.stringify($('Parse Vision Analysis').item.json.analysis.tones) }} AS tones\nUNWIND tones AS tone\nMATCH (c:Droom:Content { id: '{{ $('Parse Vision Analysis').item.json.content_id }}', brand_id: 'eastern-healing-traditions' })\nMATCH (t:Droom:Tone { name: tone.name })\nMERGE (c)-[r:HAS_TONE]->(t)\nSET r.confidence = tone.confidence\nRETURN c.id, t.name, r.confidence"
+      },
+      "id": "neo4j-tone-rels",
+      "name": "Create Tone Relationships",
+      "type": "n8n-nodes-base.neo4j",
+      "typeVersion": 1,
+      "position": [1680, 180],
+      "credentials": { "neo4j": { "id": "neo4j-db", "name": "neo4j-db" } }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Set Content Variables').item.json.dashboard_base_url }}/api/webhooks/content-uploaded",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"brand_id\": \"eastern-healing-traditions\",\n  \"content_id\": \"{{ $('Parse Vision Analysis').item.json.content_id }}\",\n  \"filename\": \"{{ $('Parse Vision Analysis').item.json.filename }}\",\n  \"media_type\": \"{{ $('Parse Vision Analysis').item.json.media_type }}\",\n  \"quality_score\": {{ $('Parse Vision Analysis').item.json.analysis.quality_score }},\n  \"timestamp\": \"{{ new Date().toISOString() }}\"\n}",
+        "options": { "timeout": 5000 }
+      },
+      "id": "notify-dashboard",
+      "name": "Notify Dashboard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1920, 180]
+    },
+    {
+      "parameters": {
+        "jsCode": "const error = $input.all()[0].json;\nconsole.error('[EHT Content Ingestion] Error:', JSON.stringify({\n  workflow: 'content-ingestion',\n  brand_id: 'eastern-healing-traditions',\n  error: error.message || JSON.stringify(error),\n  timestamp: new Date().toISOString()\n}));\nreturn [{json: {error: true, message: 'Content ingestion failed'}}];"
+      },
+      "id": "error-handler",
+      "name": "Error Handler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 420]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": { "main": [[{ "node": "Set Content Variables", "type": "main", "index": 0 }]] },
+    "S3 Event Webhook": { "main": [[{ "node": "Set Content Variables", "type": "main", "index": 0 }]] },
+    "Set Content Variables": { "main": [[{ "node": "Claude Vision Analysis", "type": "main", "index": 0 }]] },
+    "Claude Vision Analysis": { "main": [[{ "node": "Parse Vision Analysis", "type": "main", "index": 0 }]] },
+    "Parse Vision Analysis": { "main": [[{ "node": "Create Embedding", "type": "main", "index": 0 }]] },
+    "Create Embedding": { "main": [[{ "node": "Upsert to Pinecone", "type": "main", "index": 0 }]] },
+    "Upsert to Pinecone": { "main": [[{ "node": "Create Content Node in Neo4j", "type": "main", "index": 0 }]] },
+    "Create Content Node in Neo4j": { "main": [[{ "node": "Create Tone Relationships", "type": "main", "index": 0 }]] },
+    "Create Tone Relationships": { "main": [[{ "node": "Notify Dashboard", "type": "main", "index": 0 }]] }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "eastern-healing-traditions" },
+    { "name": "content-ingestion" },
+    { "name": "droom" }
+  ],
+  "pinData": {},
+  "versionId": "1"
+}
